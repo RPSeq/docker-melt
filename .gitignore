@@ -1,3 +1,4 @@
 #Exclude archive files
 *.tar
 *.gz
+*.zip
