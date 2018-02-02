@@ -14,20 +14,20 @@ RUN apt-get update && \
     libnss-sss \
     openjdk-8-jre \
     unzip \
+    perl \
     --no-install-recommends && \
     apt-get clean all
 
 # Add melt and bowtie (ADD unarchives tarball but not .zip)
 ADD MELTv2.1.4.tar.gz /opt/
-ADD bowtie2-2.3.4-linux-x86_64.zip /opt/
+ADD bowtie2-2.3.4-linux-x86_64.zip /tmp/
 
 # Unzip bowtie and rm unnecessary data included with MELT
-RUN cd /opt/ && \
-    unzip bowtie2-2.3.4-linux-x86_64.zip && \
-    rm bowtie2-2.3.4-linux-x86_64.zip && \
-    rm -r MELTv2.1.4/add_bed_files && \
-    rm -r MELTv2.1.4/me_refs && \
-    rm -r MELTv2.1.4/prior_files
+RUN unzip -d /opt/ /tmp/bowtie2-2.3.4-linux-x86_64.zip && \
+    rm -r /opt/MELTv2.1.4/add_bed_files && \
+    rm -r /opt/MELTv2.1.4/me_refs && \
+    rm -r /opt/MELTv2.1.4/prior_files && \
+    rm -r /tmp/*
 
 # add tools to path
 ENV PATH "/opt/bowtie2-2.3.4-linux-x86_64:${PATH}"
