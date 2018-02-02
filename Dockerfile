@@ -18,9 +18,10 @@ RUN apt-get update && \
     --no-install-recommends && \
     apt-get clean all
 
-# Add melt and bowtie (ADD unarchives tarball but not .zip)
+# Add melt, bowtie, and the dockerfile
 ADD MELTv2.1.4.tar.gz /opt/
 ADD bowtie2-2.3.4-linux-x86_64.zip /tmp/
+ADD Dockerfile /
 
 # Unzip bowtie and rm unnecessary data included with MELT
 RUN unzip -d /opt/ /tmp/bowtie2-2.3.4-linux-x86_64.zip && \
